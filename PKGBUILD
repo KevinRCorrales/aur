@@ -8,15 +8,12 @@
 # https://software.classictetris.net/icecat/
 
 ## options
-: ${_build_bin:=true}
-
-unset _pkgtype
-[[ "${_build_bin::1}" == "t" ]] && _pkgtype+="-bin"
+: ${_install_path:=opt}
 
 ## basic info
 _pkgname="icecat"
-pkgname="$_pkgname${_pkgtype:-}"
-pkgver=115.9.1
+pkgname="$_pkgname-bin"
+pkgver=115.10.0
 pkgrel=1
 pkgdesc="GNU version of the Firefox ESR browser"
 url="https://icecatbrowser.org"
@@ -32,40 +29,7 @@ _dl_file="icecat-$pkgver.en-US.linux-$CARCH.tar.bz2"
 noextract=("$_dl_file")
 
 source=("$_dl_url/$_dl_file")
-sha256sums=('62e0052e1733f100300330efc38343294b92a9c133692602aed96768eaa7f128')
-
-prepare() {
-  cat >icecat.desktop <<END
-[Desktop Entry]
-Version=1.0
-Name=IceCat
-GenericName=Web Browser
-Comment=Browse the World Wide Web
-Keywords=Internet;WWW;Browser;Web;Explorer
-Exec=icecat %u
-Icon=icecat
-Terminal=false
-X-MultipleArgs=false
-Type=Application
-MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;application/x-xpinstall;
-StartupNotify=true
-StartupWMClass=icecat
-Categories=Network;WebBrowser;
-Actions=new-window;new-private-window;safe-mode;
-
-[Desktop Action new-window]
-Name=New Window
-Exec=icecat --new-window %u
-
-[Desktop Action new-private-window]
-Name=New Private Window
-Exec=icecat --private-window %u
-
-[Desktop Action safe-mode]
-Name=Safe Mode
-Exec=icecat -safe-mode %u
-END
-}
+sha256sums=('f8345a5181a76f190d577ee957654e7e691ffb543585c4d39a7bded6e7e4b8ee')
 
 package() {
   depends=(
@@ -97,8 +61,6 @@ package() {
     #zlib
   )
 
-  local _install_path="opt"
-
   # app
   install -dm755 "$pkgdir/$_install_path"
   bsdtar -C "$pkgdir/$_install_path" -xf "$srcdir/$_dl_file"
@@ -110,18 +72,44 @@ package() {
   install -dm755 "$pkgdir/usr/bin"
   ln -sf "/$_install_path/$_pkgname/$_pkgname" "$pkgdir/usr/bin/$_pkgname"
 
-  # desktop file
-  install -Dm644 "$_pkgname.desktop" "$pkgdir/usr/share/applications/$_pkgname.desktop"
-
   # icon
-  install -Dm755 "$pkgdir/$_install_path/$_pkgname/browser/chrome/icons/default/default128.png" "$pkgdir/usr/share/pixmaps/$_pkgname.png"
+  install -Dm644 "$pkgdir/$_install_path/$_pkgname/browser/chrome/icons/default/default128.png" "$pkgdir/usr/share/pixmaps/$_pkgname.png"
 
-  # fix permissions
-  chmod -R u+rwX,go+rX,go-w "$pkgdir/"
+  # desktop file
+  install -Dm644 /dev/stdin "$pkgdir/usr/share/applications/$_pkgname.desktop" << END
+[Desktop Entry]
+Version=1.0
+Name=IceCat
+GenericName=Web Browser
+Comment=Browse the World Wide Web
+Keywords=Internet;WWW;Browser;Web;Explorer
+Exec=icecat %u
+Icon=icecat
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;application/x-xpinstall;
+StartupNotify=true
+StartupWMClass=icecat
+Categories=Network;WebBrowser;
+Actions=new-window;new-private-window;safe-mode;
+
+[Desktop Action new-window]
+Name=New Window
+Exec=icecat --new-window %u
+
+[Desktop Action new-private-window]
+Name=New Private Window
+Exec=icecat --private-window %u
+
+[Desktop Action safe-mode]
+Name=Safe Mode
+Exec=icecat -safe-mode %u
+END
 
   # disable auto-updates
   local _policies_json="$pkgdir/$_install_path/$_pkgname/distribution/policies.json"
-  install -Dvm644 /dev/stdin "$_policies_json" <<END
+  install -Dvm644 /dev/stdin "$_policies_json" << END
 {
   "policies": {
     "DisableAppUpdate": true
@@ -131,7 +119,7 @@ END
 
   # custom defaults
   local vendorjs="$pkgdir/$_install_path/$_pkgname/browser/defaults/preferences/vendor.js"
-  install -Dvm644 /dev/stdin "$vendorjs" <<END
+  install -Dvm644 /dev/stdin "$vendorjs" << END
 // Use LANG environment variable to choose locale
 pref("intl.locale.requested", "");
 
@@ -153,4 +141,7 @@ pref("browser.aboutConfig.showWarning", false);
 // Prevent telemetry notification
 pref("services.settings.main.search-telemetry-v2.last_check", $(date +%s));
 END
+
+  # fix permissions
+  chmod -R u+rwX,go+rX,go-w "$pkgdir/"
 }
