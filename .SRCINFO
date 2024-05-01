@@ -1,6 +1,6 @@
 pkgbase = teams-for-linux-bin
 	pkgdesc = Unofficial Microsoft Teams for Linux client (binary version)
-	pkgver = 1.4.19
+	pkgver = 1.4.31
 	pkgrel = 1
 	url = https://github.com/IsmaelMartinez/teams-for-linux
 	arch = x86_64
@@ -16,11 +16,11 @@ pkgbase = teams-for-linux-bin
 	conflicts = teams-for-linux-git
 	conflicts = teams-for-linux-wbundled-electron
 	options = !strip
-	source_x86_64 = https://github.com/IsmaelMartinez/teams-for-linux/releases/download/v1.4.19/teams-for-linux_1.4.19_amd64.deb
-	b2sums_x86_64 = aa367107df82078f4e7bcfc54b4324529869a89334f70d4c058bf53d6472457b574595bcfcf94ffe039e52eeb69ecbfac3825e4711038eed5d868c7c648e4bcf
-	source_aarch64 = https://github.com/IsmaelMartinez/teams-for-linux/releases/download/v1.4.19/teams-for-linux_1.4.19_arm64.deb
-	b2sums_aarch64 = 13022edb9acdb189583bf1ef61e1a2442034c8f833c727c5e8378fb0bed33ccfda3d338b06693602909c472b28eee526279b0ac0bd1252573f9e5e902194d6b7
-	source_armv7h = https://github.com/IsmaelMartinez/teams-for-linux/releases/download/v1.4.19/teams-for-linux_1.4.19_armv7l.deb
-	b2sums_armv7h = 46ea644749f177df404cba8f02b75cdd9c2f79c6ef44ccc7345af527963068ca42f278b7702ba7c0a39804f3e00862f6389c879ae7d5ef09c3f29609c403033f
+	source_x86_64 = https://github.com/IsmaelMartinez/teams-for-linux/releases/download/v1.4.31/teams-for-linux_1.4.31_amd64.deb
+	b2sums_x86_64 = 5fd9fbdfc15f0dd5fcd09cc04d09ceebff7bf244b4515b8416d016d47f6967e1aeb1b8b44aa03b00398f7fa2927c9220081a934a72f1bb411175119381107fb8
+	source_aarch64 = https://github.com/IsmaelMartinez/teams-for-linux/releases/download/v1.4.31/teams-for-linux_1.4.31_arm64.deb
+	b2sums_aarch64 = df84c7367b587130b89a0812dbeaae9316075d0d5ef6e147a7cdba9db016a3c449bd10fd1407f17eb877e921d50ad124724702241c0966770607c63b01fe30a0
+	source_armv7h = https://github.com/IsmaelMartinez/teams-for-linux/releases/download/v1.4.31/teams-for-linux_1.4.31_armv7l.deb
+	b2sums_armv7h = 61bc90d73d0eddd1e3a8a1dc0351ae89d1cb04b844ea491b1c8ed996c0cfd7ab74bd62a7ce538c40ce8dfcc61b6268234f5a0e01b4882eca80f444ba8218681d
 
 pkgname = teams-for-linux-bin
