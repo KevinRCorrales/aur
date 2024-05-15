@@ -13,7 +13,7 @@
 ## basic info
 _pkgname="icecat"
 pkgname="$_pkgname-bin"
-pkgver=115.10.0
+pkgver=115.11.0
 pkgrel=1
 pkgdesc="GNU version of the Firefox ESR browser"
 url="https://icecatbrowser.org"
@@ -29,7 +29,7 @@ _dl_file="icecat-$pkgver.en-US.linux-$CARCH.tar.bz2"
 noextract=("$_dl_file")
 
 source=("$_dl_url/$_dl_file")
-sha256sums=('f8345a5181a76f190d577ee957654e7e691ffb543585c4d39a7bded6e7e4b8ee')
+sha256sums=('0f3794b881378be81a77c6950dafa3b073d8ebf96424440261249a8715f90652')
 
 package() {
   depends=(
@@ -109,7 +109,7 @@ END
 
   # disable auto-updates
   local _policies_json="$pkgdir/$_install_path/$_pkgname/distribution/policies.json"
-  install -Dvm644 /dev/stdin "$_policies_json" << END
+  install -Dm644 /dev/stdin "$_policies_json" << END
 {
   "policies": {
     "DisableAppUpdate": true
@@ -119,7 +119,7 @@ END
 
   # custom defaults
   local vendorjs="$pkgdir/$_install_path/$_pkgname/browser/defaults/preferences/vendor.js"
-  install -Dvm644 /dev/stdin "$vendorjs" << END
+  install -Dm644 /dev/stdin "$vendorjs" << END
 // Use LANG environment variable to choose locale
 pref("intl.locale.requested", "");
 
