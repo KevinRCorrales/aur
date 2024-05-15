@@ -1,6 +1,6 @@
 pkgbase = pseint-bin
 	pkgdesc = A tool for learning programming basis with a simple spanish pseudocode
-	pkgver = 20230517
+	pkgver = 20240122
 	pkgrel = 1
 	url = http://pseint.sourceforge.net
 	arch = x86_64
@@ -10,7 +10,7 @@ pkgbase = pseint-bin
 	depends = rsync
 	conflicts = pseint
 	noextract = creator.psz
-	source = pseint-20230517.tgz::https://cfhcable.dl.sourceforge.net/project/pseint/20230517/pseint-l64-20230517.tgz
-	sha256sums = 1208bbf2247f0b5f89c0b6f85ee0ab9816a89c102a6d4ab7a041109b1425cb4d
+	source = pseint-20240122.tgz::https://cfhcable.dl.sourceforge.net/project/pseint/20240122/pseint-l64-20240122.tgz
+	sha256sums = 4ed1945df7a2935ea8da2809ded71f737ddabcbeeaa4976d9b75f7567054b1c5
 
 pkgname = pseint-bin

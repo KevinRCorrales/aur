@@ -3,7 +3,7 @@
 
 pkgname=pseint-bin
 _pkgname=${pkgname%-*}
-pkgver=20230517
+pkgver=20240122
 pkgrel=1
 pkgdesc='A tool for learning programming basis with a simple spanish pseudocode'
 arch=('x86_64')
@@ -14,8 +14,7 @@ makedepends=('gendesk')
 depends=('wxwidgets-gtk3' 'rsync')
 noextract=(creator.psz)
 source=("$_pkgname-$pkgver.tgz::https://cfhcable.dl.sourceforge.net/project/$_pkgname/$pkgver/$_pkgname-l64-$pkgver.tgz")
-sha256sums=('1208bbf2247f0b5f89c0b6f85ee0ab9816a89c102a6d4ab7a041109b1425cb4d')  # 'makepkg -g' to generate it.
-
+sha256sums=('4ed1945df7a2935ea8da2809ded71f737ddabcbeeaa4976d9b75f7567054b1c5')
 
 # Función 'prepare': Prepara el entorno antes de compilar el paquete.
 prepare(){
@@ -34,13 +33,11 @@ prepare(){
         --categories='Development,Education'
 }
 
-
 # Función 'pkgver': Devuelve la versión del paquete.
 pkgver(){
     cd $_pkgname
     cat version
 }
-
 
 # Función 'package': Empaqueta los archivos compilados en el paquete final.
 package(){
@@ -59,14 +56,20 @@ package(){
     install -Dvm755 <(echo -e '#!/usr/bin/env bash\n/opt/pseint/wxPSeInt') $pkgdir/usr/bin/$_pkgname
 }
 
-
-## Test:
-# rm -rf pseint-* src/ pkg/
+## Update:
+# updpkgsums
+# makepkg -si
 # makepkg --printsrcinfo > .SRCINFO
+# git clean -dfx
 
 ## References
-# https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=densify
-# https://wiki.archlinux.org/title/Desktop_entries#How_to_use
-# https://sourceforge.net/projects/pseint/files/
-# https://sourceforge.net/projects/pseint/files/20210609/pseint-l64-20210609.tgz/download
-# https://www.gnu.org/software/bash/manual/html_node/Process-Substitution.html
+# Example: https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=densify
+# Site:    https://sourceforge.net/projects/pseint/files/
+# Tarball: https://sourceforge.net/projects/pseint/files/20210609/pseint-l64-20210609.tgz/download
+# WebHelp: https://wiki.archlinux.org/title/Desktop_entries#How_to_use
+# WebHelp: https://www.gnu.org/software/bash/manual/html_node/Process-Substitution.html
+
+## Clean:
+# rm -rf pseint-* src/ pkg/
+
+# 👤 Autor: https://t.me/dakataca 💻 🐬 #
