@@ -4,16 +4,16 @@ pkgname=signal-desktop-beta-bin
 pkgrel=1
 pkgdesc="Private messaging from your desktop"
 arch=('x86_64')
-url="https://github.com/WhisperSystems/Signal-Desktop#readme"
+url='https://signal.org'
 license=('GPL3')
 depends=('libnotify' 'libxtst' 'nss' 'xdg-utils' 'libxss')
 options=('!strip' '!emptydirs')
 install=${pkgname}.install
 provides=('signal-desktop-beta')
-_pkgver=7.9.0-beta.1
+_pkgver=7.10.0-beta.1
 pkgver=${_pkgver/-/}
 source=("https://updates.signal.org/desktop/apt/pool/s/signal-desktop-beta/signal-desktop-beta_${_pkgver}_amd64.deb")
-sha256sums=('359a361fead7eeccbe68f3fd065f4458f1113a484b5c6da9b9475b734b3b35bc')
+sha256sums=('f12ecee6fe75e0e8d481746e62fa8e7fcdf7efb45e7d9ac5ad00f631b2e6d100')
 
 package(){
   # Extract package data
