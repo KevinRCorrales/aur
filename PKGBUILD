@@ -4,33 +4,35 @@
 pkgname=pseint-bin
 _pkgname=${pkgname%-*}
 pkgver=20240122
-pkgrel=1
-pkgdesc='A tool for learning programming basis with a simple spanish pseudocode'
+pkgrel=2
+pkgdesc='Tool to learn the basics of programming using a simple and intuitive pseudolanguage in Spanish'
 arch=('x86_64')
 url='http://pseint.sourceforge.net'
 license=('GPL2')
 conflicts=("$_pkgname")
-makedepends=('gendesk')
-depends=('wxwidgets-gtk3' 'rsync')
+makedepends=('rsync')
+depends=('wxwidgets-gtk3')
 noextract=(creator.psz)
 source=("$_pkgname-$pkgver.tgz::https://cfhcable.dl.sourceforge.net/project/$_pkgname/$pkgver/$_pkgname-l64-$pkgver.tgz")
 sha256sums=('4ed1945df7a2935ea8da2809ded71f737ddabcbeeaa4976d9b75f7567054b1c5')
 
-# Función 'prepare': Prepara el entorno antes de compilar el paquete.
-prepare(){
+# Función 'prepare': Prepara el entorno antes de compilar/empaquetar el paquete.
+prepare() {
     cd $_pkgname
-
-    # Utilidad 'gendesk' para generar el archivo .desktop.
-    gendesk -f -n \
-        --pkgname="$_pkgname" \
-        --pkgdesc="$pkgdesc" \
-        --name="$_pkgname" \
-        --genericname="$_pkgname" \
-        --comment="$pkgdesc" \
-        --exec="$_pkgname" \
-        --path="/opt/$_pkgname" \
-        --icon="$_pkgname" \
-        --categories='Development,Education'
+    cat > $_pkgname.desktop << EOF
+[Desktop Entry]
+Version=$pkgver-$pkgrel
+Type=Application
+Name=PSeInt PSeudocode Interpreter.
+Name[es]=PSeInt PSeudocódigo Intérprete.
+GenericName=PSeInt
+Comment=Tool to learn the basics of programming using a simple and intuitive pseudolanguage in Spanish.
+Comment[es]=Herramienta para aprender las bases de la programación usando un simple e intuitivo pseudolenguaje en español.
+Exec=/opt/$_pkgname %F
+Icon=$_pkgname
+Terminal=false
+Categories=Development;Education;
+EOF
 }
 
 # Función 'pkgver': Devuelve la versión del paquete.
@@ -63,11 +65,11 @@ package(){
 # git clean -dfx
 
 ## References
-# Example: https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=densify
 # Site:    https://sourceforge.net/projects/pseint/files/
-# Tarball: https://sourceforge.net/projects/pseint/files/20210609/pseint-l64-20210609.tgz/download
-# WebHelp: https://wiki.archlinux.org/title/Desktop_entries#How_to_use
+# Tarball: https://sourceforge.net/projects/pseint/files/20240122/pseint-l64-20240122.tgz/download
+# WebHelp: https://specifications.freedesktop.org/menu-spec/menu-spec-1.0.html#category-registry
 # WebHelp: https://www.gnu.org/software/bash/manual/html_node/Process-Substitution.html
+# WebHelp: https://wiki.archlinux.org/title/Desktop_entries#How_to_use
 
 ## Clean:
 # rm -rf pseint-* src/ pkg/

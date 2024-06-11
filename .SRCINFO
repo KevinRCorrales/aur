@@ -1,13 +1,12 @@
 pkgbase = pseint-bin
-	pkgdesc = A tool for learning programming basis with a simple spanish pseudocode
+	pkgdesc = Tool to learn the basics of programming using a simple and intuitive pseudolanguage in Spanish
 	pkgver = 20240122
-	pkgrel = 1
+	pkgrel = 2
 	url = http://pseint.sourceforge.net
 	arch = x86_64
 	license = GPL2
-	makedepends = gendesk
+	makedepends = rsync
 	depends = wxwidgets-gtk3
-	depends = rsync
 	conflicts = pseint
 	noextract = creator.psz
 	source = pseint-20240122.tgz::https://cfhcable.dl.sourceforge.net/project/pseint/20240122/pseint-l64-20240122.tgz
