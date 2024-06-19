@@ -1,15 +1,14 @@
 # Maintainer:
 # Contributor: Pellegrino Prevete <pellegrinoprevete@gmail.com>
 
-pkgname=customtkinter
 _name=CustomTkinter
+pkgname=python-customtkinter
 pkgver=5.2.2
 pkgrel=1
 pkgdesc="A modern and customizable python UI-library based on Tkinter"
 arch=('any')
 url="https://github.com/TomSchimansky/CustomTkinter"
 license=('MIT')
-provides=('python-customtkinter')
 depends=('python' 'python-darkdetect' 'python-packaging' 'python-pillow' 'python-typing_extensions')
 makedepends=('python-build' 'python-installer' 'python-setuptools' 'python-wheel')
 source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
