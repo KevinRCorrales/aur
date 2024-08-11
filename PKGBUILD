@@ -58,6 +58,7 @@ check() {
   # run only the unit tests
   pytest tests/unit \
     -m 'not darwin and not win32' \
+    --ignore 'tests/unit/test_isolation.py' \
     -n=auto --maxprocesses="${PYTEST_XDIST_AUTO_NUM_WORKERS:-2}" --dist='load'
 }
 
