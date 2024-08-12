@@ -1,22 +1,16 @@
 # Maintainer:
 # Contributor: Figue <ffigue at gmail dot com>
 
-## useful links
-# https://icecatbrowser.org/
-# https://www.gnu.org/software/gnuzilla/
-# https://git.savannah.gnu.org/cgit/gnuzilla.git
-# https://software.classictetris.net/icecat/
-
 ## options
 : ${_install_path:=opt}
 
 ## basic info
 _pkgname="icecat"
 pkgname="$_pkgname-bin"
-pkgver=115.13.0
+pkgver=115.14.0
 pkgrel=1
 pkgdesc="GNU version of the Firefox ESR browser"
-url="https://icecatbrowser.org"
+url="https://koji.fedoraproject.org/koji/packageinfo?packageID=19055"
 license=('MPL-2.0')
 arch=('x86_64')
 
@@ -25,89 +19,39 @@ conflicts=('icecat')
 
 options=('!strip' '!debug')
 
-_dl_url="https://icecatbrowser.org/assets/icecat/$pkgver"
-_dl_file="icecat-$pkgver.en-US.linux-$CARCH.tar.bz2"
-
-noextract=("$_dl_file")
+_dl_url="https://kojipkgs.fedoraproject.org//work/tasks/1183/121761183/"
+_dl_file="icecat-115.14.0-1.rh1.fc41.$CARCH.rpm"
 
 source=("$_dl_url/$_dl_file")
-sha256sums=('13323ed7cc54188bd4459290518912c18f624fbc0420ddbb0440a1a168ae36a2')
+sha256sums=('f818ce7d88fe316b81004321aebf51f2c9a45606546e5f58fe33dba85b12b38d')
 
 package() {
   depends=(
-    'dbus-glib'
     'alsa-lib'
+    'dbus-glib'
     'gtk3'
-
-    ## implicit
-    #at-spi2-core
-    #cairo
-    #dbus
-    #fontconfig
-    #freetype2
-    #gdk-pixbuf2
-    #glib2
-    #harfbuzz
-    #libx11
-    #libxcb
-    #libxcomposite
-    #libxcursor
-    #libxdamage
-    #libxext
-    #libxfixes
-    #libxi
-    #libxrandr
-    #libxrender
-    #libxtst
-    #pango
-    #zlib
+    'libvpx'
+    'nspr'
+    'nss'
   )
 
-  # app
-  install -dm755 "$pkgdir/$_install_path"
-  bsdtar -C "$pkgdir/$_install_path" -xf "$srcdir/$_dl_file"
+  # main files
+  _path="$pkgdir/$_install_path"
+  install -dm755 "$_path"
+  mv usr/lib64/icecat "$_path/"
 
   # duplicate binary
-  ln -sf "$_pkgname" "$pkgdir/$_install_path/$_pkgname/$_pkgname-bin"
+  ln -sf icecat-bin "$_path/$_pkgname/icecat"
+
+  # icon, desktop file
+  _path="$pkgdir/usr/share"
+  install -dm755 "$_path"
+  mv usr/share/icons "$_path/"
+  mv usr/share/applications "$_path/"
 
   # symlink
   install -dm755 "$pkgdir/usr/bin"
   ln -sf "/$_install_path/$_pkgname/$_pkgname" "$pkgdir/usr/bin/$_pkgname"
-
-  # icon
-  install -Dm644 "$pkgdir/$_install_path/$_pkgname/browser/chrome/icons/default/default128.png" "$pkgdir/usr/share/pixmaps/$_pkgname.png"
-
-  # desktop file
-  install -Dm644 /dev/stdin "$pkgdir/usr/share/applications/$_pkgname.desktop" << END
-[Desktop Entry]
-Version=1.0
-Name=IceCat
-GenericName=Web Browser
-Comment=Browse the World Wide Web
-Keywords=Internet;WWW;Browser;Web;Explorer
-Exec=icecat %u
-Icon=icecat
-Terminal=false
-X-MultipleArgs=false
-Type=Application
-MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;application/x-xpinstall;
-StartupNotify=true
-StartupWMClass=icecat
-Categories=Network;WebBrowser;
-Actions=new-window;new-private-window;safe-mode;
-
-[Desktop Action new-window]
-Name=New Window
-Exec=icecat --new-window %u
-
-[Desktop Action new-private-window]
-Name=New Private Window
-Exec=icecat --private-window %u
-
-[Desktop Action safe-mode]
-Name=Safe Mode
-Exec=icecat -safe-mode %u
-END
 
   # disable auto-updates
   local _policies_json="$pkgdir/$_install_path/$_pkgname/distribution/policies.json"
