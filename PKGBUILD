@@ -4,7 +4,7 @@
 # Contributor: Andrew Shark
 
 pkgname=pycharm-professional
-pkgver=2024.1.4
+pkgver=2024.2
 pkgrel=1
 pkgdesc="Python IDE for Professional Developers. Professional Edition"
 arch=('x86_64' 'x86_64_v3' 'aarch64')
@@ -32,9 +32,9 @@ source_x86_64_v3=($source_x86_64)
 source_aarch64=("https://download-cf.jetbrains.com/python/${pkgname}-${pkgver}-aarch64.tar.gz")
 sha256sums=('6ff245b42b475a5b97c359d97bc48d573c2988170fc195073c9187d5abe1c576'
             '21e9d192712fb537d9e5abccc54970becb347b32ad2be469a35b2585f45a9116')
-sha256sums_x86_64=('3a12ada098a839ba3c32820071ecc04cb71e8e1066d0753397399c2e52941de9')
-sha256sums_x86_64_v3=('3a12ada098a839ba3c32820071ecc04cb71e8e1066d0753397399c2e52941de9')
-sha256sums_aarch64=('a90c657a333e1825c934d524cb426115c85d19d7aebfa4a149fda5062be29fab')
+sha256sums_x86_64=('433614ddf391fa208f65684ff511ade2d79a87de995699b6a3c6837c27b03b27')
+sha256sums_x86_64_v3=('433614ddf391fa208f65684ff511ade2d79a87de995699b6a3c6837c27b03b27')
+sha256sums_aarch64=('2af60f9229b77e2682bf3daa29d18b88598b98cfb1a42d2e739c86388f31c821')
 # makedepends=('python-setuptools' 'cython')
 optdepends=(
     'ipython: For enhanced interactive Python shell inside Pycharm'
@@ -57,7 +57,7 @@ fi
             
 prepare() {
     # clean up for PyDev debugger
-    find pycharm-${pkgver}/plugins/python/helpers/pydev/ \( -name *.so -o -name *.pyd -o -name *.dll \) -delete
+    find pycharm-${pkgver}/plugins/python-ce/helpers/pydev/ \( -name *.so -o -name *.pyd -o -name *.dll \) -delete
 }
 
 package() {
@@ -75,11 +75,8 @@ package() {
     install -Dm 644 "${pkgdir}/opt/${pkgname}/bin/pycharm.png" "${pkgdir}/usr/share/icons/hicolor/128x128/apps/pycharm-professional.png"
     install -Dm 644 "${pkgdir}/opt/${pkgname}/bin/pycharm.svg" "${pkgdir}/usr/share/icons/hicolor/scalable/apps/pycharm-professional.svg"
 
-    # issue https://youtrack.jetbrains.com/issue/IDEA-313202
-    chmod 4755 "${pkgdir}/opt/pycharm-professional/jbr/lib/chrome-sandbox"
-
     # exec
     install -dm 755 "${pkgdir}/usr/bin/"
-    ln -s "/opt/${pkgname}/bin/pycharm.sh" "${pkgdir}/usr/bin/pycharm-professional"
+    ln -s "/opt/${pkgname}/bin/pycharm" "${pkgdir}/usr/bin/pycharm-professional"
     ln -s "/opt/${pkgname}/bin/ltedit.sh" "${pkgdir}/usr/bin/ltedit-professional"
 }
