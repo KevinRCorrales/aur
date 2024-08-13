@@ -5,7 +5,7 @@
 
 pkgname=pycharm-professional
 pkgver=2024.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Python IDE for Professional Developers. Professional Edition"
 arch=('x86_64' 'x86_64_v3' 'aarch64')
 url='https://www.jetbrains.com/pycharm/'
@@ -74,6 +74,9 @@ package() {
     install -dm 755 "${pkgdir}/usr/share/icons/hicolor/"{128x128,scalable}"/apps/"
     install -Dm 644 "${pkgdir}/opt/${pkgname}/bin/pycharm.png" "${pkgdir}/usr/share/icons/hicolor/128x128/apps/pycharm-professional.png"
     install -Dm 644 "${pkgdir}/opt/${pkgname}/bin/pycharm.svg" "${pkgdir}/usr/share/icons/hicolor/scalable/apps/pycharm-professional.svg"
+
+    # fix the path of the binary in Pycharm Light Edit launcher
+    sed -i "s/pycharm.sh/pycharm/g" "${pkgdir}/opt/${pkgname}/bin/ltedit.sh"
 
     # exec
     install -dm 755 "${pkgdir}/usr/bin/"
