@@ -8,7 +8,7 @@
 _pkgname="icecat"
 pkgname="$_pkgname-bin"
 pkgver=115.14.0
-pkgrel=1
+pkgrel=2
 pkgdesc="GNU version of the Firefox ESR browser"
 url="https://koji.fedoraproject.org/koji/packageinfo?packageID=19055"
 license=('MPL-2.0')
@@ -19,11 +19,11 @@ conflicts=('icecat')
 
 options=('!strip' '!debug')
 
-_dl_url="https://kojipkgs.fedoraproject.org//work/tasks/1183/121761183/"
-_dl_file="icecat-115.14.0-1.rh1.fc41.$CARCH.rpm"
+_dl_url="https://kojipkgs.fedoraproject.org/packages/icecat/$pkgver/1.rh1.fc42/$CARCH/"
+_dl_file="icecat-$pkgver-1.rh1.fc42.$CARCH.rpm"
 
 source=("$_dl_url/$_dl_file")
-sha256sums=('f818ce7d88fe316b81004321aebf51f2c9a45606546e5f58fe33dba85b12b38d')
+sha256sums=('75043ec8b0608e0bd4798030707ef80d0c140905eb94ef85220591e8af7909f4')
 
 package() {
   depends=(
