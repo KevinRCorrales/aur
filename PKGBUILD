@@ -7,8 +7,8 @@
 ## basic info
 _pkgname="icecat"
 pkgname="$_pkgname-bin"
-pkgver=115.14.0
-pkgrel=2
+pkgver=115.15.0
+pkgrel=1
 pkgdesc="GNU version of the Firefox ESR browser"
 url="https://koji.fedoraproject.org/koji/packageinfo?packageID=19055"
 license=('MPL-2.0')
@@ -23,7 +23,7 @@ _dl_url="https://kojipkgs.fedoraproject.org/packages/icecat/$pkgver/1.rh1.fc42/$
 _dl_file="icecat-$pkgver-1.rh1.fc42.$CARCH.rpm"
 
 source=("$_dl_url/$_dl_file")
-sha256sums=('75043ec8b0608e0bd4798030707ef80d0c140905eb94ef85220591e8af7909f4')
+sha256sums=('aee8ad4b23477202c59d1cb8b148fbfce2e16e08e0b3890e38583147c2b21133')
 
 package() {
   depends=(
