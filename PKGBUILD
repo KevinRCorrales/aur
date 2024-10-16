@@ -1,4 +1,5 @@
-# Maintainer: Mark Wagie <mark dot wagie at proton dot me>
+# Maintainer: 
+# Contributor: Mark Wagie <mark dot wagie at proton dot me>
 # Contributor: Sam <dev at samarthj dot com>
 # Contributor: Mehmet Ozgur Bayhan <mozgurbayhan at gmail.com>
 # Contributor: Thomas Quillan <tjquillan at gmail.com>
