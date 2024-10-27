@@ -1,4 +1,4 @@
-# Maintainer: 
+# Maintainer: envolution
 # Contributor: Mark Wagie <mark dot wagie at proton dot me>
 # Contributor: Sam <dev at samarthj dot com>
 # Contributor: Mehmet Ozgur Bayhan <mozgurbayhan at gmail.com>
@@ -49,6 +49,7 @@ prepare() {
 }
 
 build() {
+  ls
   cd "$pkgname-$pkgver"
   python -m build --wheel --no-isolation
 }
@@ -71,3 +72,5 @@ package() {
   install -Dm644 COPYING.txt -t "$pkgdir/usr/share/licenses/$pkgname/"
   install -Dm644 README.rst -t "$pkgdir/usr/share/doc/$pkgname/"
 }
+
+# vim: ts=2 sw=2 et:
