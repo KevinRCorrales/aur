@@ -4,7 +4,7 @@
 # Contributor: Andrew Shark
 
 pkgname=pycharm-professional
-pkgver=2024.3.1
+pkgver=2024.3.1.1
 pkgrel=1
 pkgdesc="Python IDE for Professional Developers. Professional Edition"
 arch=('x86_64' 'x86_64_v3' 'aarch64')
@@ -20,8 +20,6 @@ depends=(
     glibc
     sh
     python
-    python-setuptools
-    cython
     libdbusmenu-glib
     ttf-font
     fontconfig
@@ -32,10 +30,10 @@ source_x86_64_v3=($source_x86_64)
 source_aarch64=("https://download-cf.jetbrains.com/python/${pkgname}-${pkgver}-aarch64.tar.gz")
 sha256sums=('6ff245b42b475a5b97c359d97bc48d573c2988170fc195073c9187d5abe1c576'
             '21e9d192712fb537d9e5abccc54970becb347b32ad2be469a35b2585f45a9116')
-sha256sums_x86_64=('7bd9ea5c4eae1d1fc71cd538b1443c809c77c05fb8c793f3ebb5b1abd898a70f')
-sha256sums_x86_64_v3=('7bd9ea5c4eae1d1fc71cd538b1443c809c77c05fb8c793f3ebb5b1abd898a70f')
-sha256sums_aarch64=('2483768c690f6caa9c1c3e3ef948fbd88e2b1ebb6f77ebd3f6c80e12e406e6c9')
-# makedepends=('python-setuptools' 'cython')
+sha256sums_x86_64=('5698131d93d00a261c720a31ec54ef1c850581c274be6938dd923e8c0383da25')
+sha256sums_x86_64_v3=('5698131d93d00a261c720a31ec54ef1c850581c274be6938dd923e8c0383da25')
+sha256sums_aarch64=('a301f7316b17ace60c9e765f50ae0987262e99da3feb222c9abf761fda10cff3')
+makedepends=('python-setuptools' 'cython')
 optdepends=(
     'ipython: For enhanced interactive Python shell inside Pycharm'
     'openssh: For deployment and remote connections'
@@ -49,15 +47,29 @@ optdepends=(
     'jupyter-server: For Jupyter notebooks and apps'
 )
             
-if [[ "${CARCH}" == "x86_64" ]] ||  [[ "${CARCH}" == "x86_64_v3" ]] ; then
-    install=pycharm-professional_x86_64.install
-elif [ "${CARCH}" == "aarch64" ]; then
-    install=pycharm-professional_aarch64.install
-fi
-            
 prepare() {
     # clean up for PyDev debugger
     find pycharm-${pkgver}/plugins/python-ce/helpers/pydev/ \( -name *.so -o -name *.pyd -o -name *.dll \) -delete
+}
+
+build(){
+    cd "pycharm-${pkgver}"
+    echo ":: Building Cython speed-ups"
+    # compile PyDev debugger used by PyCharm to speedup debugging
+    python ./plugins/python-ce/helpers/pydev/setup_cython.py build_ext --inplace --force-cython
+
+    _gccarch='-m64'
+    if [ "${CARCH}" == "aarch64" ]; then
+        _gccarch='-march=armv8-a+crypto'
+    fi
+
+    # for attach debugger
+    pushd ./plugins/python-ce/helpers/pydev/pydevd_attach_to_process/linux_and_mac
+        g++ $_gccarch -shared -o ../attach_linux_amd64.so -fPIC -nostartfiles attach.cpp
+    popd
+
+    rm -rf ./plugins/python/helpers/pydev/build
+    echo ":: Cython speed-ups done"
 }
 
 package() {
