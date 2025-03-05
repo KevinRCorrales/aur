@@ -3,7 +3,7 @@
 pkgname=librewolf-bin
 provides=(${pkgname//-bin/""})
 conflicts=(${pkgname//-bin/""})
-pkgver=135.0.1
+pkgver=136.0_1
 pkgrel=1
 pkgdesc="Community-maintained fork of Firefox, focused on privacy, security and freedom."
 arch=(x86_64 aarch64)
@@ -27,12 +27,12 @@ options=(!emptydirs)
 install='librewolf-bin.install'
 
 _project_id=44042130
-_base_url=https://gitlab.com/api/v4/projects/${_project_id}/packages/generic/${pkgname//-bin/""}/${pkgver}-${pkgrel}
-_uploadpath_aarch64=${_base_url}/${pkgname//-bin/""}-${pkgver}-${pkgrel}-linux-arm64-package.tar.xz
-_uploadpath_x86_64=${_base_url}/${pkgname//-bin/""}-${pkgver}-${pkgrel}-linux-x86_64-package.tar.xz
+_base_url=https://gitlab.com/api/v4/projects/${_project_id}/packages/generic/${pkgname//-bin/""}/${pkgver//_/-}
+_uploadpath_aarch64=${_base_url}/${pkgname//-bin/""}-${pkgver//_/-}-linux-arm64-package.tar.xz
+_uploadpath_x86_64=${_base_url}/${pkgname//-bin/""}-${pkgver//_/-}-linux-x86_64-package.tar.xz
 _uploadpath_sig_aarch64=${_uploadpath_aarch64}.sig
 _uploadpath_sig_x86_64=${_uploadpath_x86_64}.sig
-_source_tag="${pkgver}-${pkgrel}"
+_source_tag="${pkgver//_/-}"
 source=(
   "git+https://gitlab.com/${pkgname//-bin/""}-community/browser/source.git#tag=${_source_tag}"
   default192x192.png
@@ -40,12 +40,12 @@ source=(
 )
 source_aarch64=("${_uploadpath_aarch64}" "${_uploadpath_sig_aarch64}")
 source_x86_64=("${_uploadpath_x86_64}" "${_uploadpath_sig_x86_64}")
-sha256sums=('710a26fa2cfd338fccc1d3326aa28b23c4b458d0195f4f7d03ad124dd43522fe'
+sha256sums=('093d4bd144b5b3ff52e02d3438e3cb61bb370aab3e5e53641206c2ec612a0c3c'
             '959c94c68cab8d5a8cff185ddf4dca92e84c18dccc6dc7c8fe11c78549cdc2f1'
             '7d01d317b7db7416783febc18ee1237ade2ec86c1567e2c2dd628a94cbf2f25d')
-sha256sums_x86_64=('8a2203794a5cc50a5a4152e89e2f1755d84559be9bdf6c8b2db3962bb7c4f841'
+sha256sums_x86_64=('d25855fdb805cac527cb6ba4584252ad63e0953ef8958de4a06621dfdffeed32'
                    'SKIP')
-sha256sums_aarch64=('958b325aba5fe011ee4ba7658cd74e9ebb7e42780af2816ef4775c804d7c4e7e'
+sha256sums_aarch64=('98eeebf944a0f03a061a83d92a61ac54f30784e6c0a269daa16177808c492e6a'
                     'SKIP')
 
 package() {
