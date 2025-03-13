@@ -1,16 +1,16 @@
 pkgbase = icecat-bin
 	pkgdesc = GNU version of the Firefox ESR browser
-	pkgver = 115.20.0
+	pkgver = 115.21.0
 	pkgrel = 1
 	url = https://koji.fedoraproject.org/koji/packageinfo?packageID=19055
 	arch = x86_64
 	license = MPL-2.0
-	provides = icecat=115.20.0
+	provides = icecat=115.21.0
 	conflicts = icecat
 	options = !strip
 	options = !debug
-	source = https://kojipkgs.fedoraproject.org/packages/icecat/115.20.0/4.rh1.fc43/x86_64//icecat-115.20.0-4.rh1.fc43.x86_64.rpm
-	sha256sums = ff73edaacef2895da827c7e0854f98e53c2b1b643aa28aaf0945434a23b5ec5d
+	source = https://kojipkgs.fedoraproject.org/packages/icecat/115.21.0/1.rh1.fc43/x86_64//icecat-115.21.0-1.rh1.fc43.x86_64.rpm
+	sha256sums = 3e3716de96f6e589f3a58e8c64f6f41d8c4024606e2bda20339908cc9c5896b2
 
 pkgname = icecat-bin
 	depends = alsa-lib
