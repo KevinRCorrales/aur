@@ -3,11 +3,11 @@
 
 ## options
 : ${_install_path:=usr/lib}
-: ${_rh_pkgrel:="1.rh1.fc43"}
+: ${_rh_pkgrel:="2.rh1.fc42"}
 
 _pkgname="icecat"
 pkgname="$_pkgname-bin"
-pkgver=115.21.0
+pkgver=115.22.0
 pkgrel=1
 pkgdesc="GNU version of the Firefox ESR browser"
 url="https://koji.fedoraproject.org/koji/packageinfo?packageID=19055"
@@ -23,7 +23,7 @@ _dl_url="https://kojipkgs.fedoraproject.org/packages/icecat/$pkgver/$_rh_pkgrel/
 _dl_file="icecat-$pkgver-$_rh_pkgrel.$CARCH.rpm"
 
 source=("$_dl_url/$_dl_file")
-sha256sums=('3e3716de96f6e589f3a58e8c64f6f41d8c4024606e2bda20339908cc9c5896b2')
+sha256sums=('73f421f4c996444621d9c2fd1fded2de47a96311beee528f20c4aa1ab499fc3a')
 
 package() {
   depends=(
