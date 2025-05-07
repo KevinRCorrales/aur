@@ -2,15 +2,16 @@
 # Contributor: Figue <ffigue at gmail dot com>
 
 ## options
+: ${_build_upstream:=icb} # fedora or icb
+
 : ${_install_path:=usr/lib}
 : ${_rh_pkgrel:="2.rh1.fc42"}
 
 _pkgname="icecat"
 pkgname="$_pkgname-bin"
-pkgver=115.22.0
+pkgver=115.23.0
 pkgrel=1
 pkgdesc="GNU version of the Firefox ESR browser"
-url="https://koji.fedoraproject.org/koji/packageinfo?packageID=19055"
 license=('MPL-2.0')
 arch=('x86_64')
 
@@ -19,39 +20,111 @@ conflicts=('icecat')
 
 options=('!strip' '!debug')
 
-_dl_url="https://kojipkgs.fedoraproject.org/packages/icecat/$pkgver/$_rh_pkgrel/$CARCH/"
-_dl_file="icecat-$pkgver-$_rh_pkgrel.$CARCH.rpm"
+_source_fedora() {
+  url="https://koji.fedoraproject.org/koji/packageinfo?packageID=19055"
 
-source=("$_dl_url/$_dl_file")
-sha256sums=('73f421f4c996444621d9c2fd1fded2de47a96311beee528f20c4aa1ab499fc3a')
+  _dl_url="https://kojipkgs.fedoraproject.org/packages/icecat/$pkgver/$_rh_pkgrel/$CARCH"
+  _dl_file="icecat-$pkgver-$_rh_pkgrel.$CARCH.rpm"
+
+  source=("$_dl_url/$_dl_file")
+  sha256sums=('SKIP')
+
+  _package() {
+    depends+=(
+      'libvpx'
+      'nspr'
+      'nss'
+    )
+
+    # main files
+    _path="$pkgdir/$_install_path"
+    mkdir -pm755 "$_path"
+    mv usr/lib64/icecat "$_path/"
+
+    # duplicate binary
+    ln -sf icecat-bin "$_path/$_pkgname/icecat"
+
+    # symlink
+    mkdir -pm755 "$pkgdir/usr/bin"
+    ln -sf "/$_install_path/$_pkgname/$_pkgname" "$pkgdir/usr/bin/$_pkgname"
+
+    # icon, launcher
+    _path="$pkgdir/usr/share"
+    mkdir -pm755 "$_path"
+    mv usr/share/icons "$_path/"
+    mv usr/share/applications "$_path/"
+  }
+}
+
+_source_icb() {
+  url="https://icecatbrowser.org"
+
+  _dl_url="https://icecatbrowser.org/assets/icecat/$pkgver"
+  _dl_file="icecat-$pkgver.en-US.linux-$CARCH.tar.bz2"
+
+  noextract=("$_dl_file")
+
+  source=("$_dl_url/$_dl_file")
+  sha256sums=('1f336512661f6e668beaa0bec151e79b35a78bfd9b0211639af1fdb0b198e0fe')
+
+  _package() {
+    # main files
+    _path="$pkgdir/$_install_path"
+    mkdir -pm755 "$_path"
+    bsdtar -C "$_path" -xf "$srcdir/$_dl_file"
+
+    # duplicate binary
+    ln -sf icecat-bin "$_path/$_pkgname/icecat"
+
+    # symlink
+    mkdir -pm755 "$pkgdir/usr/bin"
+    ln -sf "/$_install_path/$_pkgname/$_pkgname" "$pkgdir/usr/bin/$_pkgname"
+
+    # icon
+    install -Dm644 "$pkgdir/$_install_path/$_pkgname/browser/chrome/icons/default/default128.png" "$pkgdir/usr/share/pixmaps/$_pkgname.png"
+
+    # launcher
+    install -Dm644 /dev/stdin "$pkgdir/usr/share/applications/$_pkgname.desktop" << END
+[Desktop Entry]
+Version=1.0
+Name=IceCat
+GenericName=Web Browser
+Comment=Browse the World Wide Web
+Keywords=Internet;WWW;Browser;Web;Explorer
+Exec=icecat %u
+Icon=icecat
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;application/x-xpinstall;
+StartupNotify=true
+StartupWMClass=icecat
+Categories=Network;WebBrowser;
+Actions=new-window;new-private-window;safe-mode;
+
+[Desktop Action new-window]
+Name=New Window
+Exec=icecat --new-window %u
+
+[Desktop Action new-private-window]
+Name=New Private Window
+Exec=icecat --private-window %u
+
+[Desktop Action safe-mode]
+Name=Safe Mode
+Exec=icecat -safe-mode %u
+END
+  }
+}
 
 package() {
   depends=(
     'alsa-lib'
     'dbus-glib'
     'gtk3'
-    'libvpx'
-    'nspr'
-    'nss'
   )
 
-  # main files
-  _path="$pkgdir/$_install_path"
-  install -dm755 "$_path"
-  mv usr/lib64/icecat "$_path/"
-
-  # duplicate binary
-  ln -sf icecat-bin "$_path/$_pkgname/icecat"
-
-  # icon, desktop file
-  _path="$pkgdir/usr/share"
-  install -dm755 "$_path"
-  mv usr/share/icons "$_path/"
-  mv usr/share/applications "$_path/"
-
-  # symlink
-  install -dm755 "$pkgdir/usr/bin"
-  ln -sf "/$_install_path/$_pkgname/$_pkgname" "$pkgdir/usr/bin/$_pkgname"
+  _package
 
   # disable auto-updates
   local _policies_json="$pkgdir/$_install_path/$_pkgname/distribution/policies.json"
@@ -88,6 +161,12 @@ pref("browser.aboutConfig.showWarning", false);
 pref("services.settings.main.search-telemetry-v2.last_check", $(date +%s));
 END
 
-  # fix permissions
+  # permissions
   chmod -R u+rwX,go+rX,go-w "$pkgdir/"
 }
+
+if [[ "${_build_upstream::1}" == "f" ]]; then
+  _source_fedora
+else
+  _source_icb
+fi
