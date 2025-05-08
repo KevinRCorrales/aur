@@ -1,29 +1,22 @@
-# Maintainer: kaptoxic@yahoo.com
+# Maintainer: Srikar <zeltronsrikar@gmail.com>
+# Contributor: kaptoxic@yahoo.com
 # Contributor: Jaime Gil de Sagredo <jaimegildesagredo@gmail.com>
 
-_basename=checkstyle
-pkgname='checkstyle-bin'
-pkgver='8.5'
+pkgname=checkstyle-bin
 pkgrel=1
-pkgdesc='A tool for helping programmers write Java code that adheres to a coding standard'
+pkgver=10.23.1
+pkgdesc='Java source code linter'
 arch=('any')
-license=('LGPL2.1')
-depends=('java-runtime>=8')
-#makedepends=('maven' 'java-environment>=8')
-conflicts=('checkstyle')
-provides=('checkstyle')
-url='http://checkstyle.sourceforge.net'
-source=(
-  "https://sourceforge.net/projects/checkstyle/files/checkstyle/${pkgver}/${_basename}-${pkgver}-bin.tar.gz/download"
+url='https://github.com/checkstyle/checkstyle'
+license=('LGPL-2.1-only')
+depends=('java-runtime>=11')
+source=("checkstyle.jar::https://github.com/checkstyle/checkstyle/releases/download/checkstyle-${pkgver}/checkstyle-${pkgver}-all.jar"
   'checkstyle')
-md5sums=('5ace016b0fd22b6cd86b06119f648815'
-         '74f9c7a1d6ceaece01a0035158338849')
+sha512sums=('SKIP'
+  'SKIP')
+conflicts=('checkstyle')
 
 package() {
-  cd "${srcdir}/${_basename}-${pkgver}/"
-  mkdir -p "${pkgdir}/usr/share/java/${_basename}/"
-  mkdir -p "${pkgdir}/usr/bin/"
-  install -D -m755 "${srcdir}/${_basename}" "${pkgdir}/usr/bin/${_basename}"
-  install -D -m644 "${srcdir}/${_basename}-${pkgver}/${_basename}-${pkgver}-all.jar" "${pkgdir}/usr/share/java/${_basename}/${_basename}.jar"
-  install -D -m644 "LICENSE" "${pkgdir}/usr/share/licenses/${_basename}/LICENSE"
+  install -Dm644 "${srcdir}/checkstyle.jar" "${pkgdir}/usr/share/java/checkstyle/checkstyle.jar"
+  install -Dm755 "${srcdir}/checkstyle" "${pkgdir}/usr/bin/checkstyle"
 }
