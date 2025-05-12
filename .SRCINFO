@@ -1,7 +1,7 @@
 pkgbase = icecat-bin
 	pkgdesc = GNU version of the Firefox ESR browser
 	pkgver = 115.23.0
-	pkgrel = 1
+	pkgrel = 2
 	url = https://icecatbrowser.org
 	arch = x86_64
 	license = MPL-2.0

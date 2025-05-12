@@ -2,15 +2,18 @@
 # Contributor: Figue <ffigue at gmail dot com>
 
 ## options
-: ${_build_upstream:=icb} # fedora or icb
+: ${_use_upstream:=icb} # fedora or icb
 
 : ${_install_path:=usr/lib}
-: ${_rh_pkgrel:="2.rh1.fc42"}
+: ${_rh_pkgrel:="1.rh1.fc42"}
+
+: ${_cksum_fed=}
+: ${_cksum_icb=1f336512661f6e668beaa0bec151e79b35a78bfd9b0211639af1fdb0b198e0fe}
 
 _pkgname="icecat"
 pkgname="$_pkgname-bin"
 pkgver=115.23.0
-pkgrel=1
+pkgrel=2
 pkgdesc="GNU version of the Firefox ESR browser"
 license=('MPL-2.0')
 arch=('x86_64')
@@ -27,7 +30,7 @@ _source_fedora() {
   _dl_file="icecat-$pkgver-$_rh_pkgrel.$CARCH.rpm"
 
   source=("$_dl_url/$_dl_file")
-  sha256sums=('SKIP')
+  sha256sums=("${_cksum_fed:-SKIP}")
 
   _package() {
     depends+=(
@@ -65,7 +68,7 @@ _source_icb() {
   noextract=("$_dl_file")
 
   source=("$_dl_url/$_dl_file")
-  sha256sums=('1f336512661f6e668beaa0bec151e79b35a78bfd9b0211639af1fdb0b198e0fe')
+  sha256sums=("${_cksum_icb:-SKIP}")
 
   _package() {
     # main files
@@ -86,7 +89,6 @@ _source_icb() {
     # launcher
     install -Dm644 /dev/stdin "$pkgdir/usr/share/applications/$_pkgname.desktop" << END
 [Desktop Entry]
-Version=1.0
 Name=IceCat
 GenericName=Web Browser
 Comment=Browse the World Wide Web
@@ -98,7 +100,7 @@ X-MultipleArgs=false
 Type=Application
 MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;application/x-xpinstall;
 StartupNotify=true
-StartupWMClass=icecat
+StartupWMClass=icecat-default
 Categories=Network;WebBrowser;
 Actions=new-window;new-private-window;safe-mode;
 
@@ -165,7 +167,7 @@ END
   chmod -R u+rwX,go+rX,go-w "$pkgdir/"
 }
 
-if [[ "${_build_upstream::1}" == "f" ]]; then
+if [[ "${_use_upstream::1}" == "f" ]]; then
   _source_fedora
 else
   _source_icb
