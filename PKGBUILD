@@ -4,17 +4,49 @@ pkgname=librewolf-bin
 provides=(${pkgname//-bin/""})
 conflicts=(${pkgname//-bin/""})
 epoch=1
-pkgver=138.0.3_1
+pkgver=138.0.4_1
 _fixedfirefoxver="${pkgver%_*}" # Version of Firefox this LibreWolf version is based on, but the Firefox patch number is always included
 _librewolfver="${pkgver#*_}"
 _firefoxver="${_fixedfirefoxver%.0}" # Removes ".0" from the end. For "136.0.0" this will result in "136.0" but for "136.0.1" won't do anything.
 pkgrel=1
 pkgdesc="Community-maintained fork of Firefox, focused on privacy, security and freedom."
 arch=(x86_64 aarch64)
-license=(MPL GPL LGPL)
+license=(MPL-2.0)
 url="https://librewolf.net/"
-depends=(gtk3 libxt startup-notification mime-types dbus
-         nss ttf-font libpulse ffmpeg)
+depends=(
+  gtk3
+  libxt
+  startup-notification
+  mime-types
+  dbus
+  nss
+  ttf-font
+  libpulse
+  ffmpeg
+  hicolor-icon-theme
+  libxdamage
+  libxi
+  alsa-lib
+  libxrender
+  libxcursor
+  gdk-pixbuf2
+  libxrandr
+  pango
+  freetype2
+  glibc
+  bash
+  fontconfig
+  libxcomposite
+  glib2
+  gcc-libs
+  libx11
+  libxfixes
+  at-spi2-core
+  libxcb
+  cairo
+  nspr
+  libxext
+)
 makedepends=(git)
 optdepends=(
   'hunspell-en_US: Spell checking, American English'
@@ -44,12 +76,12 @@ source=(
 )
 source_aarch64=("${_uploadpath_aarch64}" "${_uploadpath_sig_aarch64}")
 source_x86_64=("${_uploadpath_x86_64}" "${_uploadpath_sig_x86_64}")
-sha256sums=('ebbc40e429765d99d7667946f7e772f2473e6e2be7ce91d2d964ed0656fef98c'
+sha256sums=('c3be52aeb0590d246949c81ea8218d0b209a7daff60ff9c11ef7bbdebc7a9534'
             '959c94c68cab8d5a8cff185ddf4dca92e84c18dccc6dc7c8fe11c78549cdc2f1'
             '7d01d317b7db7416783febc18ee1237ade2ec86c1567e2c2dd628a94cbf2f25d')
-sha256sums_x86_64=('3e2fca2229a6413a507a4b0a17264ba6cb36d0a86d8bd6380efd88e391df307c'
+sha256sums_x86_64=('37832666062d7b3473a1fbb13eb79633e32b3d96e0ae1fe3841b43a879dd173c'
                    'SKIP')
-sha256sums_aarch64=('f5ef02839abbe184f6e3d030ce9a90cc8595b5d0c1bef3a5ed89d519f7155976'
+sha256sums_aarch64=('cb8c11e9182d11eb2fa20cbe7d1b55c18e9d30caeb0bf6cf8c7df937f0112365'
                     'SKIP')
 
 package() {
