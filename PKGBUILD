@@ -5,7 +5,7 @@ pkgdesc="UASPL Automatizado para la Seguridad y Protección de Linux"
 arch=('x86_64')
 url="https://github.com/KevinCrrl/UASPL"
 license=('GPL3')
-depends=('clamav' 'ufw' 'rkhunter')
+depends=('clamav' 'ufw' 'rkhunter' 'systemd' 'sudo')
 source=("https://github.com/KevinCrrl/UASPL/releases/download/${pkgver}/uaspl" "LICENSE" "README.md")
 sha256sums=('SKIP' 'SKIP' 'SKIP')
 
