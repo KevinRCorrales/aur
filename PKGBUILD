@@ -6,11 +6,11 @@ arch=('x86_64')
 url="https://github.com/KevinCrrl/UASPL"
 license=('GPL3')
 depends=('clamav' 'ufw' 'rkhunter' 'systemd' 'sudo')
-source=("https://github.com/KevinCrrl/UASPL/releases/download/${pkgver}/uaspl" "LICENSE" "README.md")
+source=("https://github.com/KevinCrrl/UASPL/releases/download/${pkgver}/uaspl-${pkgver}" "LICENSE" "README.md")
 sha256sums=('SKIP' 'SKIP' 'SKIP')
 
 package() {
-    install -Dm755 "uaspl" "$pkgdir/usr/bin/uaspl"
+    install -Dm755 "uaspl-${pkgver}" "$pkgdir/usr/bin/uaspl"
     install -Dm644 "LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
     install -Dm644 "README.md" "$pkgdir/usr/share/doc/$pkgname/README.md"
 }
