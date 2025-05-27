@@ -1,5 +1,5 @@
 pkgname=uaspl-bin
-pkgver=1.1.0
+pkgver=1.1.1
 pkgrel=1
 pkgdesc="UASPL Automatizado para la Seguridad y Protección de Linux"
 arch=('x86_64')
