@@ -8,11 +8,11 @@
 : ${_rh_pkgrel:="1.rh1.fc42"}
 
 : ${_cksum_fed=}
-: ${_cksum_icb=892c36321c95954a6df1fa5640cfccca294b4fba02c215a95d2ff28b8b1acac1}
+: ${_cksum_icb=b3e4ce0c16f8313c1a63057e5acb96fd73232976dee444cf210c7b28aa4ca028}
 
 _pkgname="icecat"
 pkgname="$_pkgname-bin"
-pkgver=115.23.1
+pkgver=115.24.0
 pkgrel=1
 pkgdesc="GNU version of the Firefox ESR browser"
 license=('MPL-2.0')
