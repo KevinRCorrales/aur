@@ -10,6 +10,6 @@ pkgbase = kpa-bin
 	depends = git
 	depends = base-devel
 	source = https://github.com/KevinCrrl/kpa/releases/download/1.0.0/kpa-1.0.0
-	sha256sums = baa4f7895efc076678748566e074db5fee5ec32f09da8ea4e5dd441ab9e2cec8
+	sha256sums = baf50f17a6e5fef3ede56113bac838a636cc11b124ad131da6833f4b2b1fcb43
 
 pkgname = kpa-bin

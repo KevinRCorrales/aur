@@ -7,7 +7,7 @@ url="https://github.com/KevinCrrl/kpa"
 license=('GPL3')
 depends=('pacman' 'coreutils' 'git' 'base-devel')
 source=("https://github.com/KevinCrrl/kpa/releases/download/${pkgver}/kpa-${pkgver}")
-sha256sums=('baa4f7895efc076678748566e074db5fee5ec32f09da8ea4e5dd441ab9e2cec8')
+sha256sums=('baf50f17a6e5fef3ede56113bac838a636cc11b124ad131da6833f4b2b1fcb43')
 
 package() {
     install -Dm755 "kpa-${pkgver}" "$pkgdir/usr/bin/kpa"
