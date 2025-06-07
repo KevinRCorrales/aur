@@ -1,15 +1,18 @@
 pkgbase = kpa-bin
 	pkgdesc = KevinCrrl Python AUR helper
-	pkgver = 1.0.1
+	pkgver = 1.1.0
 	pkgrel = 1
 	url = https://github.com/KevinCrrl/kpa
 	arch = x86_64
+	arch = aarch64
 	license = GPL3
 	depends = pacman
 	depends = coreutils
 	depends = git
 	depends = base-devel
-	source = https://github.com/KevinCrrl/kpa/releases/download/1.0.1/kpa-1.0.1
-	sha256sums = b437ed6fabaeca171f8f8b67baa2b649b63b83b5391fcfa042d74979eb7c55fa
+	source_x86_64 = https://github.com/KevinCrrl/kpa/releases/download/1.1.0/kpa-x86_64-1.1.0
+	sha256sums_x86_64 = 66990c1b411f00a786af3631fdfe267a8c1509197d52c162b93283e1dc9e1443
+	source_aarch64 = https://github.com/KevinCrrl/kpa/releases/download/1.1.0/kpa-aarch64-1.1.0
+	sha256sums_aarch64 = afbfc4247a224c47ee6aba74eba6ba01b0c360d024b84aac1a3db1c205dfa466
 
 pkgname = kpa-bin
