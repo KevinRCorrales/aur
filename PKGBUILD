@@ -14,5 +14,4 @@ sha256sums=('eccc4277e16fa1b28346bf8c60585877531433f8f80c98fc82d78c9a90f3278b' '
 package() {
     install -Dm755 "uaspl-${pkgver}" "$pkgdir/usr/bin/uaspl"
     install -Dm644 "LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
-    install -Dm644 "README.md" "$pkgdir/usr/share/doc/$pkgname/README.md"
 }
