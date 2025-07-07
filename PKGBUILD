@@ -1,5 +1,5 @@
 pkgname=uaspl-bin
-pkgver=1.2.1
+pkgver=1.2.2
 pkgrel=1
 pkgdesc="UASPL Automatizado para la Seguridad y Protección de Linux"
 arch=('x86_64')
@@ -9,7 +9,7 @@ license=('GPL3')
 # Y solo necesita de estas 5 mostradas abajo que se ejecutan en comandos dentro del programa, es decir no están integradas, solo se llaman para ser ejecutadas.
 depends=('clamav' 'ufw' 'rkhunter' 'systemd' 'sudo')
 source=("https://github.com/KevinCrrl/UASPL/releases/download/${pkgver}/uaspl-${pkgver}" "LICENSE")
-sha256sums=('eccc4277e16fa1b28346bf8c60585877531433f8f80c98fc82d78c9a90f3278b' 'SKIP')
+sha256sums=('d382eddd46ece5fade84750d4ebb991e0dd8d26af67570cdf0707bd15f7ad310' 'SKIP')
 
 package() {
     install -Dm755 "uaspl-${pkgver}" "$pkgdir/usr/bin/uaspl"
