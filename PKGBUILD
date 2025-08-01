@@ -1,17 +1,17 @@
 pkgname=kpa-bin
-pkgver=1.2.0
+pkgver=1.3.0
 pkgrel=1
 pkgdesc="KevinCrrl Python AUR helper"
 arch=('x86_64' 'aarch64')
 url="https://github.com/KevinCrrl/kpa"
 license=('GPL-3')
-depends=('pacman' 'coreutils' 'git' 'base-devel')
-optdepends=('torsocks' 'tor')
+depends=('pacman' 'git' 'base-devel')
+optdepends=('torsocks' 'tor' 'sudo' 'doas')
 source_x86_64=("https://github.com/KevinCrrl/kpa/releases/download/${pkgver}/kpa-x86_64-${pkgver}")
-sha256sums_x86_64=('d8e5fe326270e6ded54b07836664c7d19097c70a37650b8aedfddd3924beec14')
+sha256sums_x86_64=('39a9d8c732a71e0cec4afad9aa9ad608c01668621b23988fcf8339fd65a2d791')
 
 source_aarch64=("https://github.com/KevinCrrl/kpa/releases/download/${pkgver}/kpa-aarch64-${pkgver}")
-sha256sums_aarch64=('8565af104b870771c78b067df2f05992114979b089a90d1eaa397890714b618f')
+sha256sums_aarch64=('d5cee07c40f9bc3617e39b10fa940ecbac36215f9a92b1e973997f465f34f3b4')
 
 package() {
     local binaryname="kpa-${CARCH}-${pkgver}"
