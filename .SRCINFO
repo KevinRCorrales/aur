@@ -1,6 +1,6 @@
 pkgbase = librewolf-bin
 	pkgdesc = Community-maintained fork of Firefox, focused on privacy, security and freedom.
-	pkgver = 141.0.3_1
+	pkgver = 142.0.0_1
 	pkgrel = 1
 	epoch = 1
 	url = https://librewolf.net/
@@ -52,20 +52,20 @@ pkgbase = librewolf-bin
 	options = !emptydirs
 	backup = usr/lib/librewolf/librewolf.cfg
 	backup = usr/lib/librewolf/distribution/policies.json
-	source = git+https://gitlab.com/librewolf-community/browser/source.git#tag=141.0.3-1
+	source = git+https://gitlab.com/librewolf-community/browser/source.git#tag=142.0-1
 	source = default192x192.png
 	source = librewolf.desktop
 	validpgpkeys = 662E3CDD6FE329002D0CA5BB40339DD82B12EF16
-	sha256sums = 0e55ae13a72ce956baa518d4a064f02d5ba106acce3d2ec0595d5663db3b3a47
+	sha256sums = a40aadae8e7a84d45a7de3a9d8b94415165fd5163d26b0815aa47af3fa067487
 	sha256sums = 959c94c68cab8d5a8cff185ddf4dca92e84c18dccc6dc7c8fe11c78549cdc2f1
 	sha256sums = 7d01d317b7db7416783febc18ee1237ade2ec86c1567e2c2dd628a94cbf2f25d
-	source_x86_64 = https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/141.0.3-1/librewolf-141.0.3-1-linux-x86_64-package.tar.xz
-	source_x86_64 = https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/141.0.3-1/librewolf-141.0.3-1-linux-x86_64-package.tar.xz.sig
-	sha256sums_x86_64 = 6c82aa1d04b875aa8041c6d71f12e359d2b9305ad283972dcdf84a7b63ab3b97
+	source_x86_64 = https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/142.0-1/librewolf-142.0-1-linux-x86_64-package.tar.xz
+	source_x86_64 = https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/142.0-1/librewolf-142.0-1-linux-x86_64-package.tar.xz.sig
+	sha256sums_x86_64 = 77118347429bf889e309108a74aeb30619f5a942dd2b57901dfeff9e93cbe7cc
 	sha256sums_x86_64 = SKIP
-	source_aarch64 = https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/141.0.3-1/librewolf-141.0.3-1-linux-arm64-package.tar.xz
-	source_aarch64 = https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/141.0.3-1/librewolf-141.0.3-1-linux-arm64-package.tar.xz.sig
-	sha256sums_aarch64 = 24f89da555d0f033b0a66054427fda0497f276b5127e5e9e9209f10a32fb5608
+	source_aarch64 = https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/142.0-1/librewolf-142.0-1-linux-arm64-package.tar.xz
+	source_aarch64 = https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/142.0-1/librewolf-142.0-1-linux-arm64-package.tar.xz.sig
+	sha256sums_aarch64 = bb978cbbea3c35edc2beb73e1cfbff845ba7469cf517f0cebf164323ae6ec740
 	sha256sums_aarch64 = SKIP
 
 pkgname = librewolf-bin
