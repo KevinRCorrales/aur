@@ -2,6 +2,14 @@
 
 Este es un pequeño mirror donde guardo en distintas ramas copias de los repositorios AUR de los paquetes que uso en mi Arch Linux.
 
+## USO
+
+Para clonar el PKGBUILD y demás archivos de la rama de un paquete específico y no todo el repositorio se debe usar el comando:
+
+```bash
+$ git clone --branch <package_name> --single-branch https://github.com/KevinRCorrales/aur.git <package_name>
+```
+
 ## ADVERTENCIA
 
 EL [AUR](https://aur.archlinux.org) ES UN REPOSITORIO COMUNITARIO DONDE CUALQUIERA PUEDE SUBIR UN PKGBUILD, MÁS INFO [AQUÍ](https://wiki.archlinux.org/title/Arch_User_Repository).
@@ -37,4 +45,4 @@ Aún así se recomienda revisar los PKGBUILD sean o no creador por mí en caso d
 
 ---
 **Nota:** Este proyecto es de carácter personal/educativo,  
-no está afiliado oficialmente ni con Arch Linux ni con mi Universidad.
+no está afiliado oficialmente ni con Arch Linux, ni con mi Universidad, ni con ningún desarrollador de los paquetes listados en las ramas.
