@@ -16,6 +16,7 @@ pkgbase = uaspl
 	depends = clamav
 	depends = rkhunter
 	depends = ufw
+	conflicts = uaspl-bin
 	source = https://github.com/KevinCrrl/UASPL/releases/download/1.2.2/UASPL-1.2.2.tar.xz
 	sha256sums = 0761fd9c04203002b262a7901c4449c05577971e345a8afc25efcd0c67f6810c
 

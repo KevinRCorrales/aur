@@ -7,6 +7,7 @@ url="https://github.com/KevinCrrl/UASPL"
 license=('GPL-3.0-or-later')
 source=("https://github.com/KevinCrrl/UASPL/releases/download/${pkgver}/UASPL-${pkgver}.tar.xz")
 sha256sums=("0761fd9c04203002b262a7901c4449c05577971e345a8afc25efcd0c67f6810c")
+conflicts=('uaspl-bin')
 depends=(
     'python'
     'python-customtkinter'
