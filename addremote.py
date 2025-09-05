@@ -6,4 +6,4 @@ for rama in ramas.split("\n"):
     if rama == "main" or rama == "":
         pass
     else:
-        sb.run(["git", "remote", "add", rama, f"https://aur.archlinux.org/{rama}.gio"])
+        sb.run(["git", "remote", "add", rama, f"https://aur.archlinux.org/{rama}.git"])
